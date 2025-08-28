@@ -1,12 +1,352 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>测试页</title>
+    <!-- 移动端适配核心：禁止缩放+自适应屏幕 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FloorGod - B站新人UP主</title>
+    <style>
+        /* 1. 全局变量：统一色调（MC科技风+B站粉），后续改色只需改这里 */
+        :root {
+            --primary: #165DFF; /* 主色：MC蓝（科技感） */
+            --secondary: #00E5FF; /* 辅助色：荧光青（游戏感） */
+            --accent: #FB7299; /* 强调色：B站粉（引导关注） */
+            --dark: #1E293B; /* 深色文本：清晰不刺眼 */
+            --light: #F8FAFC; /* 浅色背景：缓解视觉疲劳 */
+            --shadow: 0 4px 20px rgba(22, 93, 255, 0.15); /* 统一阴影：高级感 */
+        }
+
+        /* 2. 基础重置：消除浏览器默认样式差异 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; /* 适配中文显示 */
+        }
+
+        body {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E6F7FF 100%); /* 渐变背景：不单调 */
+            min-height: 100vh; /* 页面占满屏幕高度 */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 3. 主容器：卡片式设计（核心视觉载体） */
+        .card {
+            width: 100%;
+            max-width: 800px; /* 电脑端最大宽度：避免太宽 */
+            background: white;
+            border-radius: 20px; /* 大圆角：现代风格 */
+            box-shadow: var(--shadow);
+            overflow: hidden; /* 裁剪内部元素，避免圆角失效 */
+            transition: transform 0.3s ease; /*  hover时轻微上浮 */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 4. 顶部Banner：强化账号标识 */
+        .banner {
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); /* 渐变色Banner */
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Banner装饰：MC风格小方块（动态浮动） */
+        .banner::before, .banner::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+
+        .banner::before {
+            top: 20px;
+            left: 20px;
+            animation: float 6s linear infinite; /* 浮动动画 */
+        }
+
+        .banner::after {
+            bottom: 20px;
+            right: 20px;
+            animation: float 8s linear infinite reverse; /* 反向浮动 */
+        }
+
+        .banner h1 {
+            color: white;
+            font-size: 2.5rem; /* 大号字体：突出昵称 */
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 文字阴影：更立体 */
+        }
+
+        .banner p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 5. 账号信息区：分栏布局（清晰展示核心数据） */
+        .info-section {
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap; /* 移动端自动换行 */
+            gap: 30px; /* 元素间距：不拥挤 */
+            align-items: center;
+        }
+
+        /* 头像容器：圆形+边框（突出识别度） */
+        .avatar-box {
+            flex: 0 0 120px; /* 固定宽度：不被拉伸 */
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+            margin: 0 auto; /* 移动端居中 */
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 头像不变形 */
+            /* 占位图：替换成你的B站头像链接即可 */
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+        }
+
+        /* 信息列表：左图标+右文字（直观） */
+        .info-list {
+            flex: 1; /* 占满剩余宽度 */
+            min-width: 250px; /* 移动端最小宽度：避免文字挤在一起 */
+            list-style: none;
+        }
+
+        .info-list li {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-list li i {
+            width: 30px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+        /* 6. 粉丝进度条：可视化目标（引导关注） */
+        .progress-section {
+            padding: 0 30px 30px;
+        }
+
+        .progress-title {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #E2E8F0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            width: 0%; /* 当前进度：后续粉丝增加后修改这里（如20%） */
+            transition: width 1s ease; /* 进度动画：更生动 */
+        }
+
+        /* 7. 内容预告区：降低用户决策成本（知道关注能获得什么） */
+        .content-preview {
+            padding: 0 30px 30px;
+            border-top: 1px solid #F1F5F9; /* 分割线：区分模块 */
+            margin-top: 10px;
+        }
+
+        .content-preview h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .content-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .content-tags span {
+            padding: 6px 16px;
+            background: #F1F5F9;
+            color: var(--dark);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .content-tags span:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 8. B站跳转按钮：醒目+互动（核心转化入口） */
+        .btn-section {
+            padding: 0 30px 40px;
+            text-align: center;
+        }
+
+        .bilibili-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: linear-gradient(90deg, var(--accent), #F56565); /* B站粉渐变 */
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px; /* 胶囊按钮：现代感 */
+            box-shadow: 0 4px 15px rgba(251, 114, 153, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .bilibili-btn:hover {
+            transform: scale(1.05); /*  hover放大：吸引点击 */
+            box-shadow: 0 6px 20px rgba(251, 114, 153, 0.4);
+        }
+
+        .bilibili-btn i {
+            margin-right: 8px;
+        }
+
+        /* 9. 底部版权：简洁不抢戏 */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            color: #94A3B8;
+            font-size: 0.9rem;
+            background: #F8FAFC;
+            border-top: 1px solid #F1F5F9;
+        }
+
+        /* 10. 动画定义：浮动+淡入 */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(5deg); }
+            50% { transform: translate(0, 10px) rotate(0deg); }
+            75% { transform: translate(-10px, -5px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* 11. 媒体查询：移动端适配细节 */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2rem; /* 移动端缩小标题 */
+            }
+
+            .info-section {
+                padding: 20px;
+            }
+
+            .bilibili-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem; /* 移动端缩小按钮 */
+            }
+        }
+    </style>
+    <!-- 引入图标库：丰富视觉元素（无需额外下载） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 </head>
-<body style="text-align: center; margin-top: 50px;">
-    <h1 style="color: #6366f1;">部署成功！</h1>
-    <p>如果看到这句话，说明 GitHub Pages 已正常工作。</p>
-    <p>B站链接：<a href="https://space.bilibili.com/3546958906001482" target="_blank">点击访问</a></p>
+<body>
+    <div class="card">
+        <!-- 顶部Banner：强化账号记忆点 -->
+        <div class="banner">
+            <h1>FloorGod</h1>
+            <p>初中生新人UP主 | 用心做每一期视频 | 求关注破100粉！</p>
+        </div>
+
+        <!-- 账号核心信息：快速了解身份 -->
+        <div class="info-section">
+            <div class="avatar-box">
+                <!-- 替换src为你的B站头像链接（右键B站头像→复制图片地址） -->
+                <img src="https://tva1.sinaimg.cn/crop.0.0.1080.1080.180/007YjI0uly1h9279tq8xoj30u00u0q4a.jpg" alt="FloorGod头像">
+            </div>
+            <ul class="info-list">
+                <li><i class="fa fa-user-circle-o"></i> 昵称：FloorGod</li>
+                <li><i class="fa fa-id-card-o"></i> B站UID：3546958906001482</li>
+                <li><i class="fa fa-calendar"></i> 生日：07-09</li>
+                <li><i class="fa fa-gamepad"></i> 内容方向：MC（我的世界）相关</li>
+                <li><i class="fa fa-star-o"></i> 当前状态：筹备首稿中</li>
+            </ul>
+        </div>
+
+        <!-- 粉丝进度：可视化目标，激发支持欲 -->
+        <div class="progress-section">
+            <div class="progress-title">
+                <span>粉丝目标：100粉</span>
+                <span>当前：0/100</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- 内容预告：告诉用户“关注能获得什么” -->
+        <div class="content-preview">
+            <h3><i class="fa fa-lightbulb-o"></i> 未来会更新这些内容</h3>
+            <div class="content-tags">
+                <span>MC生存教程</span>
+                <span>建筑技巧分享</span>
+                <span>模组测评</span>
+                <span>搞笑瞬间集锦</span>
+                <span>粉丝联机实况</span>
+            </div>
+        </div>
+
+        <!-- 核心转化按钮：直达B站主页 -->
+        <div class="btn-section">
+            <a href="https://space.bilibili.com/3546958906001482?spm_id_from=333.1007.0.0" 
+               target="_blank" 
+               class="bilibili-btn">
+                <i class="fa fa-external-link"></i> 去B站关注我
+            </a>
+        </div>
+
+        <!-- 底部版权：合规且简洁 -->
+        <div class="footer">
+            © 2024 FloorGod | 页面由 GitHub Pages 托管 | 直达B站：UID 3546958906001482
+        </div>
+    </div>
+
+    <!-- 页面加载完成后执行：进度条动画+头像淡入 -->
+    <script>
+        window.onload = function() {
+            // 进度条动画（模拟加载效果）
+            setTimeout(() => {
+                document.querySelector('.progress-fill').style.width = '0%'; // 后续改粉丝数时同步修改这里
+            }, 300);
+
+            // 头像淡入效果
+            const avatar = document.querySelector('.avatar-box img');
+            avatar.style.opacity = '0';
+            avatar.style.transition = 'opacity 1s ease';
+            setTimeout(() => {
+                avatar.style.opacity = '1';
+            }, 500);
+        };
+    </script>
 </body>
 </html>
