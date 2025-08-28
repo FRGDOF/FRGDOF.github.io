@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>FloorGod - B站MC超新星</title>
+    <title>FloorGod - B站MC创作者</title>
     <style>
-        /* 1. 设计系统：紫色液态玻璃主题 */
+        /* 1. 设计系统：白色液态玻璃主题 */
         :root {
-            --purple: #6B2CC7;   /* 主色：深紫 */
-            --light-purple: #9F49EA; /* 辅色：浅紫 */
-            --glass: rgba(255,255,255,0.15); /* 液态玻璃背景 */
-            --border: rgba(255,255,255,0.2); /* 玻璃边框 */
-            --shadow: 0 8px 32px rgba(0,0,0,0.1); /* 玻璃阴影 */
-            --progress: #9F49EA; /* 进度条颜色 */
+            --primary: #6B2CC7;   /* 深紫强调色 */
+            --glass: rgba(255,255,255,0.8); /* 液态玻璃背景 */
+            --border: rgba(0,0,0,0.1);      /* 浅灰边框 */
+            --shadow: 0 8px 24px rgba(0,0,0,0.08); /* 柔和阴影 */
+            --progress: #6B2CC7; /* 进度条颜色 */
         }
 
         /* 2. 全局重置：液态玻璃核心 */
@@ -20,24 +19,24 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: "Poppins", sans-serif;
+            font-family: "Inter", sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #2C0C5A, #4A1A8E); /* 背景渐变 */
+            background: linear-gradient(135deg, #F5F7FA, #ECEEF4); /* 浅灰渐变背景 */
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* 3. 主卡片：液态玻璃效果（核心！） */
+        /* 3. 主卡片：白色液态玻璃（核心效果！） */
         .card {
             width: 90%;
             max-width: 800px;
             background: var(--glass);
-            backdrop-filter: blur(10px); /* 毛玻璃核心属性 */
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px); /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: 16px;
             box-shadow: var(--shadow);
@@ -45,33 +44,35 @@
             padding: 24px;
         }
 
-        /* 4. 顶部横幅：品牌感强化 */
+        /* 4. 顶部横幅：深紫背景区 */
         .header {
-            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
             margin-bottom: 24px;
+            text-align: center;
         }
         .header h1 {
-            font-size: 2rem;
-            color: white;
+            font-size: 1.8rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            margin-bottom: 4px;
         }
         .header p {
-            color: #E5E7EB;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
-        /* 5. 信息区：头像+资料 */
+        /* 5. 信息区：头像+资料（图标对齐） */
         .info-row {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 16px;
             margin-bottom: 16px;
         }
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             border: 2px solid white;
             overflow: hidden;
@@ -82,20 +83,23 @@
             object-fit: cover;
         }
         .info-col {
-            color: white;
+            color: #333;
         }
         .info-col p {
             margin: 4px 0;
             font-size: 0.9rem;
-            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .info-col p strong {
-            color: #FFE484; /* 强调色：亮黄 */
+        .info-col p i {
+            color: var(--primary);
+            font-size: 1rem;
         }
 
         /* 6. 进度条：可视化粉丝目标 */
         .progress-section {
-            background: var(--glass);
+            background: white;
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 16px;
@@ -104,14 +108,14 @@
         .progress-label {
             display: flex;
             justify-content: space-between;
-            color: white;
-            font-size: 0.9rem;
+            color: #666;
+            font-size: 0.85rem;
             margin-bottom: 8px;
         }
         .progress-bar {
             width: 100%;
             height: 6px;
-            background: #E5E7EB;
+            background: #ECEEF4;
             border-radius: 4px;
             overflow: hidden;
         }
@@ -122,19 +126,19 @@
             transition: width 1s ease;
         }
 
-        /* 7. 视频区：优先展示播放最高的视频 */
+        /* 7. 视频区：优先展示最高播放视频 */
         .video-section {
             margin: 24px 0;
         }
         .video-title {
-            color: white;
+            color: #333;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 12px;
         }
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 16px;
         }
         .video-card {
@@ -142,37 +146,39 @@
             overflow: hidden;
             border: 1px solid var(--border);
             transition: transform 0.3s ease;
+            background: white;
         }
         .video-card:hover {
             transform: translateY(-3px);
         }
         .video-thumbnail {
-            height: 110px;
-            background: #E5E7EB; /* 封面占位图 */
+            height: 120px;
             position: relative;
+            overflow: hidden;
         }
-        .video-thumbnail::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: url("https://i0.hdslb.com/bfs/archive/xxx.jpg") center/cover no-repeat; 
-            /* 替换为播放最高视频的封面链接 ↑ */
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .video-duration {
+        .video-meta {
             position: absolute;
-            bottom: 6px;
-            right: 6px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             background: rgba(0,0,0,0.6);
             color: white;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .video-meta span {
             font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
         }
         .video-desc {
             padding: 8px;
-            background: var(--glass);
-            color: white;
+            color: #333;
             font-size: 0.85rem;
             text-align: center;
             overflow: hidden;
@@ -185,7 +191,7 @@
             margin: 24px 0;
         }
         .tags-title {
-            color: white;
+            color: #333;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 12px;
@@ -200,24 +206,25 @@
             background: var(--glass);
             border: 1px solid var(--border);
             border-radius: 20px;
-            color: white;
+            color: #666;
             font-size: 0.85rem;
             cursor: default;
             transition: background 0.3s ease;
         }
         .tag:hover {
-            background: var(--light-purple);
+            background: var(--primary);
+            color: white;
         }
 
-        /* 9. 行动按钮：引导关注 */
+        /* 9. 行动按钮：引导关注（粉色渐变） */
         .cta-btn {
             display: block;
-            width: 80%;
-            max-width: 300px;
+            width: 60%;
+            max-width: 240px;
             margin: 24px auto;
             padding: 12px;
             text-align: center;
-            background: linear-gradient(90deg, var(--light-purple), var(--purple));
+            background: linear-gradient(90deg, #FF7EB6, #FF587A);
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -231,7 +238,7 @@
         /* 10. 页脚：版权信息 */
         .footer {
             text-align: center;
-            color: #E5E7EB;
+            color: #999;
             font-size: 0.8rem;
             opacity: 0.8;
             margin-top: 24px;
@@ -244,14 +251,16 @@
                 text-align: center;
             }
             .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
         }
     </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="card">
-        <!-- 顶部横幅 -->
+        <!-- 顶部横幅（深紫背景） -->
         <div class="header">
             <h1>FloorGod</h1>
             <p>初中生MC UP主 | 用心做视频 | 冲刺1000粉！</p>
@@ -264,15 +273,15 @@
                 <img src="https://i0.hdslb.com/bfs/face/noface.jpg" alt="FloorGod头像">
             </div>
             <div class="info-col">
-                <p><strong>昵称：</strong>FloorGod</p>
-                <p><strong>B站UID：</strong>3546958906001482</p>
-                <p><strong>生日：</strong>07-09</p>
-                <p><strong>内容方向：</strong>我的世界全系列</p>
-                <p><strong>粉丝数：</strong>100+（冲1000中）</p>
+                <p><i class="fa fa-user"></i> 昵称：FloorGod</p>
+                <p><i class="fa fa-id-card"></i> B站UID：3546958906001482</p>
+                <p><i class="fa fa-birthday-cake"></i> 生日：07-09</p>
+                <p><i class="fa fa-gamepad"></i> 内容方向：我的世界全系列</p>
+                <p><i class="fa fa-bar-chart"></i> 粉丝数：100+（冲1000中）</p>
             </div>
         </div>
 
-        <!-- 进度条：核心修复！ -->
+        <!-- 进度条（核心修复） -->
         <div class="progress-section">
             <div class="progress-label">
                 <span>粉丝目标：1000粉</span>
@@ -283,36 +292,52 @@
             </div>
         </div>
 
-        <!-- 视频区：优先展示播放最高的视频 -->
+        <!-- 视频区：最高播放视频替换指南 -->
         <div class="video-section">
             <div class="video-title">我的投稿视频（播放最高优先）</div>
             <div class="video-grid">
-                <!-- 步骤2：替换封面/时长/标题 → 找B站播放最高的视频：
-                     1. 访问你的B站空间→投稿→按播放排序；
-                     2. 右键封面→复制图片地址，替换video-thumbnail的background；
-                     3. 复制时长和标题，替换下面的内容。 -->
+                <!-- 步骤2：替换最高播放视频数据 → 
+                     1. B站空间→投稿→按播放排序→找最高视频；
+                     2. 右键封面→复制图片地址→替换img src；
+                     3. 复制时长、标题、播放量→替换对应位置。 -->
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <div class="video-duration">10:24</div>
+                        <!-- 示例封面（替换为你的真实封面） -->
+                        <img src="https://i0.hdslb.com/bfs/archive/xxx.jpg" alt="视频封面">
+                        <div class="video-meta">
+                            <span>1.1万</span> <!-- 播放量 -->
+                            <span>01:18</span> <!-- 时长 -->
+                        </div>
                     </div>
-                    <div class="video-desc">MC新手生存指南：第一天必做5件事</div>
+                    <div class="video-desc">
+                        【舒适】近百帧运行1.20.1整合包!新人作品求三连免费获取超高画质
+                    </div>
+                </div>
+                <!-- 其他视频占位（可保留或删除） -->
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://via.placeholder.com/220x120/EEE/333?text=视频2" alt="视频封面">
+                        <div class="video-meta">
+                            <span>--</span>
+                            <span>00:00</span>
+                        </div>
+                    </div>
+                    <div class="video-desc">视频标题2</div>
                 </div>
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <div class="video-duration">08:15</div>
+                        <img src="https://via.placeholder.com/220x120/EEE/333?text=视频3" alt="视频封面">
+                        <div class="video-meta">
+                            <span>--</span>
+                            <span>00:00</span>
+                        </div>
                     </div>
-                    <div class="video-desc">超实用建筑技巧：建造安全屋</div>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <div class="video-duration">12:30</div>
-                    </div>
-                    <div class="video-desc">趣味模组测评：让世界充满惊喜</div>
+                    <div class="video-desc">视频标题3</div>
                 </div>
             </div>
         </div>
 
-        <!-- 标签区 -->
+        <!-- 标签区（匹配设计图） -->
         <div class="tags-section">
             <div class="tags-title">视频内容标签</div>
             <div class="tags-grid">
@@ -327,7 +352,7 @@
             </div>
         </div>
 
-        <!-- 行动按钮 -->
+        <!-- 行动按钮（粉色渐变） -->
         <a href="https://space.bilibili.com/3546958906001482?spm_id_from=333.1007.0.0" 
            target="_blank" 
            class="cta-btn">
