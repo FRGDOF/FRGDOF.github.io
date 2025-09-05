@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowerClient - 现代化Minecraft作弊客户端</title>
+    <title>FlowerClient - 现代化Minecraft辅助客户端</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome 图标库 CDN -->
@@ -104,7 +104,7 @@
                     FlowerClient
                 </h1>
                 <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-8 max-w-lg">
-                    为Minecraft打造的 <span class="text-primary font-semibold">现代化</span> 作弊客户端，<br>强大、灵活且功能丰富，重新定义游戏体验。
+                    为Minecraft打造的 <span class="text-primary font-semibold">现代化</span> 辅助客户端，<br>强大、灵活且功能丰富，助力优化游戏体验。
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                     <a href="#join" class="btn-primary">
@@ -129,7 +129,7 @@
     <!-- 功能区域 -->
     <section id="features" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16 text-dark animate-fade-in">强大的核心功能</h2>
+            <h2 class="text-3xl font-bold text-center mb-16 text-dark animate-fade-in">核心功能</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 功能卡片 1：透视功能 -->
                 <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
@@ -138,29 +138,29 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">透视功能</h3>
                     <p class="text-gray-600">
-                        清晰查看墙壁后的实体、矿物与玩家，支持自定义透视范围与颜色，在生存与PVP中抢占先机。
+                        清晰查看墙壁后的实体、矿物与玩家，支持自定义透视范围与颜色，辅助游戏探索。
                     </p>
                 </div>
 
-                <!-- 功能卡片 2：飞行模块 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
-                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-plane text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-dark">飞行模块</h3>
-                    <p class="text-gray-600">
-                        自由控制飞行速度、高度与模式，支持平滑飞行与瞬间移动，轻松探索或跨越地形限制。
-                    </p>
-                </div>
-
-                <!-- 功能卡片 3：自动挖矿 -->
+                <!-- 功能卡片 2：自动挖矿 -->
                 <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-hammer text-primary text-xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">自动挖矿</h3>
                     <p class="text-gray-600">
-                        智能识别并挖掘指定矿物，支持自定义挖掘范围与效率，解放双手，快速获取资源。
+                        智能识别并挖掘指定矿物，支持自定义挖掘范围与效率，助力资源获取。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 3：Killaura -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-sword text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Killaura</h3>
+                    <p class="text-gray-600">
+                        AI系统可绕过Matrix、Vulcan、GrimAC等反作弊，优化战斗辅助体验。
                     </p>
                 </div>
 
@@ -171,29 +171,18 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">自定义脚本</h3>
                     <p class="text-gray-600">
-                        支持JavaScript脚本扩展，可编写自定义功能与自动化流程，满足高级用户的个性化需求。
+                        支持JavaScript脚本扩展，可编写自定义功能与自动化流程，满足个性化需求。
                     </p>
                 </div>
 
-                <!-- 功能卡片 5：反反作弊绕过 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
-                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-shield-alt text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-dark">反反作弊绕过</h3>
-                    <p class="text-gray-600">
-                        内置多种反反作弊技术，有效绕过主流服务器的反作弊系统，降低封禁风险。
-                    </p>
-                </div>
-
-                <!-- 功能卡片 6：界面自定义 -->
+                <!-- 功能卡片 5：界面自定义 -->
                 <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-palette text-primary text-xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">界面自定义</h3>
                     <p class="text-gray-600">
-                        高度可定制的UI界面，支持主题切换、元素位置调整与透明度设置，打造专属视觉体验。
+                        高度可定制的UI界面，支持主题切换、元素位置调整与透明度设置。
                     </p>
                 </div>
             </div>
@@ -249,27 +238,26 @@
                 <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12 animate-fade-in">
                     <h2 class="text-3xl font-bold mb-6 text-dark">关于 FlowerClient</h2>
                     <p class="text-gray-600 mb-4">
-                        FlowerClient 是一款为Minecraft玩家打造的现代化作弊客户端，致力于提供强大、稳定且易于使用的游戏增强功能。
+                        FlowerClient 是一款为Minecraft玩家打造的现代化辅助客户端，致力于提供强大、稳定且易于使用的游戏增强功能。
                     </p>
                     <p class="text-gray-600 mb-4">
-                        开发团队持续维护与更新，确保兼容最新Minecraft版本，并不断迭代新功能、优化用户体验。
+                        开发团队持续维护与更新，确保兼容目标Minecraft版本，并不断迭代新功能、优化用户体验。
                     </p>
-                    <div class="flex flex-wrap gap-4 mt-8">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span class="text-gray-600">免费使用</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span class="text-gray-600">无广告干扰</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span class="text-gray-600">高频次更新</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span class="text-gray-600">社区驱动开发</span>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4 text-dark">开发团队</h3>
+                        <div class="flex flex-col space-y-3">
+                            <div class="flex items-center">
+                                <span class="font-medium text-gray-800 mr-2">FloorGod</span>
+                                <a href="https://space.bilibili.com/3546958906001482?spm_id_from=333.1007.0.0" target="_blank" class="text-primary hover:underline">
+                                    <i class="fab fa-bilibili mr-1"></i>B站账号
+                                </a>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium text-gray-800 mr-2">SoulTorch</span>
+                                <a href="https://space.bilibili.com/3546596155329366?spm_id_from=333.1387.follow.user_card.click" target="_blank" class="text-primary hover:underline">
+                                    <i class="fab fa-bilibili mr-1"></i>B站账号
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -332,10 +320,6 @@
                                 <p class="text-sm text-gray-600">HMCL</p>
                             </div>
                             <div class="bg-white p-3 rounded-lg shadow-sm text-center">
-                                <i class="fas fa-fire text-primary text-xl mb-2"></i>
-                                <p class="text-sm text-gray-600">Forge</p>
-                            </div>
-                            <div class="bg-white p-3 rounded-lg shadow-sm text-center">
                                 <i class="fas fa-plug text-primary text-xl mb-2"></i>
                                 <p class="text-sm font-medium text-primary">Fabric</p>
                             </div>
@@ -356,7 +340,7 @@
                         <span class="text-xl font-bold">FlowerClient</span>
                     </div>
                     <p class="text-gray-400 max-w-xs">
-                        为Minecraft打造的现代化作弊客户端，重新定义你的游戏体验。
+                        为Minecraft打造的现代化辅助客户端，助力优化游戏体验。
                     </p>
                 </div>
                 <div class="flex space-x-6">
@@ -372,7 +356,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>© 2025 FlowerClient 开发团队. 保留所有权利.</p>
+                <p>© 2025 FlowerClient 开发团队（FloorGod | SoulTorch）. 保留所有权利.</p>
             </div>
         </div>
     </footer>
