@@ -34,14 +34,32 @@
                 text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             .card-hover {
-                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white;
             }
             .btn-primary {
-                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
             }
             .btn-secondary {
-                @apply bg-white hover:bg-gray-100 text-primary font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg border border-primary/20;
+                @apply bg-white hover:bg-gray-100 text-primary font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg border border-primary/20 transform hover:-translate-y-0.5;
             }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .animate-fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .animate-fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
@@ -50,15 +68,15 @@
     <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2">
-                <i class="fas fa-flower-daffodil text-primary text-2xl"></i>
+                <i class="fas fa-seedling text-primary text-2xl"></i>
                 <span class="text-xl font-bold text-dark">FlowerClient</span>
             </a>
             <div class="hidden md:flex space-x-6">
                 <a href="#features" class="text-gray-600 hover:text-primary transition-colors">功能</a>
-                <a href="#download" class="text-gray-600 hover:text-primary transition-colors">下载</a>
+                <a href="#join" class="text-gray-600 hover:text-primary transition-colors">加入群聊</a>
                 <a href="#about" class="text-gray-600 hover:text-primary transition-colors">关于</a>
-                <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-600 hover:text-primary transition-colors">
-                    <i class="fab fa-discord mr-1"></i>Discord
+                <a href="https://github.com/YOUR_USERNAME/FlowerClient" target="_blank" class="text-gray-600 hover:text-primary transition-colors">
+                    <i class="fab fa-github mr-1"></i>GitHub
                 </a>
             </div>
             <button class="md:hidden text-gray-600" id="mobileMenuBtn">
@@ -69,19 +87,19 @@
         <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobileMenu">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="#features" class="text-gray-600 hover:text-primary py-2 transition-colors">功能</a>
-                <a href="#download" class="text-gray-600 hover:text-primary py-2 transition-colors">下载</a>
+                <a href="#join" class="text-gray-600 hover:text-primary py-2 transition-colors">加入群聊</a>
                 <a href="#about" class="text-gray-600 hover:text-primary py-2 transition-colors">关于</a>
-                <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-600 hover:text-primary py-2 transition-colors">
-                    <i class="fab fa-discord mr-1"></i>Discord
+                <a href="https://github.com/YOUR_USERNAME/FlowerClient" target="_blank" class="text-gray-600 hover:text-primary py-2 transition-colors">
+                    <i class="fab fa-github mr-1"></i>GitHub
                 </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero 区域 -->
-    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-white to-purple-50">
+    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-white to-purple-50 overflow-hidden">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
+            <div class="md:w-1/2 mb-10 md:mb-0 animate-fade-in">
                 <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-4 text-shadow">
                     FlowerClient
                 </h1>
@@ -89,19 +107,19 @@
                     为Minecraft打造的 <span class="text-primary font-semibold">现代化</span> 作弊客户端，<br>强大、灵活且功能丰富，重新定义游戏体验。
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#download" class="btn-primary">
-                        <i class="fas fa-download mr-2"></i>立即下载
+                    <a href="#join" class="btn-primary">
+                        <i class="fab fa-qq mr-2"></i>加入QQ群聊
                     </a>
                     <a href="#features" class="btn-secondary">
                         <i class="fas fa-list mr-2"></i>查看功能
                     </a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
+            <div class="md:w-1/2 flex justify-center animate-float">
                 <!-- 抽象图形（代表客户端视觉） -->
                 <div class="w-64 h-64 bg-primary/10 rounded-xl flex items-center justify-center relative overflow-hidden">
                     <i class="fas fa-gamepad text-6xl text-primary/30 absolute -top-4 -right-4"></i>
-                    <i class="fas fa-flower-daffodil text-5xl text-primary"></i>
+                    <i class="fas fa-seedling text-5xl text-primary"></i>
                     <div class="absolute -bottom-4 -left-4 bg-secondary/20 rounded-full w-32 h-32"></div>
                 </div>
             </div>
@@ -111,10 +129,10 @@
     <!-- 功能区域 -->
     <section id="features" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16 text-dark">强大的核心功能</h2>
+            <h2 class="text-3xl font-bold text-center mb-16 text-dark animate-fade-in">强大的核心功能</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 功能卡片 1：透视功能 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-eye text-primary text-xl"></i>
                     </div>
@@ -125,7 +143,7 @@
                 </div>
 
                 <!-- 功能卡片 2：飞行模块 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-plane text-primary text-xl"></i>
                     </div>
@@ -136,7 +154,7 @@
                 </div>
 
                 <!-- 功能卡片 3：自动挖矿 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-hammer text-primary text-xl"></i>
                     </div>
@@ -147,7 +165,7 @@
                 </div>
 
                 <!-- 功能卡片 4：自定义脚本 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-code text-primary text-xl"></i>
                     </div>
@@ -158,7 +176,7 @@
                 </div>
 
                 <!-- 功能卡片 5：反反作弊绕过 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-shield-alt text-primary text-xl"></i>
                     </div>
@@ -169,7 +187,7 @@
                 </div>
 
                 <!-- 功能卡片 6：界面自定义 -->
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover animate-fade-in">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-palette text-primary text-xl"></i>
                     </div>
@@ -182,19 +200,45 @@
         </div>
     </section>
 
-    <!-- 下载区域 -->
-    <section id="download" class="py-16 bg-gradient-to-br from-purple-50 to-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4 text-dark">立即下载 FlowerClient</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto mb-8">
-                兼容Minecraft 1.8.x - 1.20.x 全版本，支持正版与第三方启动器，下载后按照说明快速安装。
+    <!-- 加入群聊区域 -->
+    <section id="join" class="py-16 bg-gradient-to-br from-purple-50 to-white relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-primary/5 rounded-full"></div>
+            <div class="absolute top-40 right-20 w-60 h-60 bg-secondary/5 rounded-full"></div>
+            <div class="absolute bottom-10 left-1/3 w-32 h-32 bg-primary/5 rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl font-bold mb-4 text-dark animate-fade-in">加入QQ群聊获取客户端</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8 animate-fade-in">
+                群号：1053346465<br>
+                加入群聊即可获取最新版本客户端，以及获取使用帮助和更新通知
             </p>
-            <a href="https://github.com/YOUR_USERNAME/FlowerClient/releases" target="_blank" class="btn-primary text-lg">
-                <i class="fas fa-download mr-2"></i>下载最新版本 (v1.0.0)
+            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=YOUR_QQ_GROUP_KEY&jump_from=webapi" target="_blank" class="btn-primary text-lg animate-fade-in">
+                <i class="fab fa-qq mr-2"></i>加入QQ群聊 1053346465
             </a>
-            <p class="text-gray-500 text-sm mt-4">
-                如遇下载/安装问题，可加入 <a href="https://discord.gg/YOUR_INVITE_LINK" class="text-primary hover:underline" target="_blank">Discord 社区</a> 获取帮助
-            </p>
+            <div class="mt-12 max-w-md mx-auto bg-white p-6 rounded-xl shadow-md animate-fade-in">
+                <h3 class="text-xl font-semibold mb-4 text-dark">群内提供</h3>
+                <div class="grid grid-cols-2 gap-4 text-left">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-600">最新客户端下载</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-600">安装使用教程</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-600">更新通知</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-600">技术支持</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -202,7 +246,7 @@
     <section id="about" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12 animate-fade-in">
                     <h2 class="text-3xl font-bold mb-6 text-dark">关于 FlowerClient</h2>
                     <p class="text-gray-600 mb-4">
                         FlowerClient 是一款为Minecraft玩家打造的现代化作弊客户端，致力于提供强大、稳定且易于使用的游戏增强功能。
@@ -213,7 +257,7 @@
                     <div class="flex flex-wrap gap-4 mt-8">
                         <div class="flex items-center">
                             <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span class="text-gray-600">免费开源</span>
+                            <span class="text-gray-600">免费使用</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-check-circle text-green-500 mr-2"></i>
@@ -229,48 +273,71 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:w-1/2">
+                <div class="md:w-1/2 animate-fade-in">
                     <div class="bg-gray-50 rounded-xl p-6">
                         <h3 class="text-xl font-semibold mb-4 text-dark">版本兼容</h3>
                         <div class="space-y-2">
                             <div class="flex items-center">
-                                <span class="w-20 text-gray-600">Minecraft 1.8.x</span>
+                                <span class="w-24 text-gray-600">Minecraft 1.8.x</span>
                                 <i class="fas fa-check text-green-500 ml-2"></i>
                             </div>
                             <div class="flex items-center">
-                                <span class="w-20 text-gray-600">Minecraft 1.12.x</span>
+                                <span class="w-24 text-gray-600">Minecraft 1.12.x</span>
                                 <i class="fas fa-check text-green-500 ml-2"></i>
                             </div>
                             <div class="flex items-center">
-                                <span class="w-20 text-gray-600">Minecraft 1.16.x</span>
+                                <span class="w-24 text-gray-600">Minecraft 1.16.x</span>
                                 <i class="fas fa-check text-green-500 ml-2"></i>
                             </div>
                             <div class="flex items-center">
-                                <span class="w-20 text-gray-600">Minecraft 1.19.x</span>
+                                <span class="w-24 text-gray-600">Minecraft 1.19.x</span>
                                 <i class="fas fa-check text-green-500 ml-2"></i>
                             </div>
                             <div class="flex items-center">
-                                <span class="w-20 text-gray-600">Minecraft 1.20.x</span>
+                                <span class="w-24 text-gray-600">Minecraft 1.20.x</span>
                                 <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                            <div class="flex items-center font-medium">
+                                <span class="w-24 text-primary">Minecraft 1.21.4</span>
+                                <i class="fas fa-check-circle text-green-500 ml-2"></i>
                             </div>
                         </div>
+                        
+                        <h3 class="text-xl font-semibold mt-8 mb-4 text-dark">支持的模组</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                                <i class="fas fa-bolt text-yellow-500 text-xl mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">钠 (Sodium)</p>
+                                    <p class="text-sm text-gray-500">性能优化</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                                <i class="fas fa-sun text-orange-400 text-xl mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">IRIS</p>
+                                    <p class="text-sm text-gray-500">光影支持</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <h3 class="text-xl font-semibold mt-8 mb-4 text-dark">支持启动器</h3>
                         <div class="flex flex-wrap gap-4">
-                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                            <div class="bg-white p-3 rounded-lg shadow-sm text-center">
                                 <i class="fas fa-cube text-primary text-xl mb-2"></i>
                                 <p class="text-sm text-gray-600">官方启动器</p>
                             </div>
-                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                            <div class="bg-white p-3 rounded-lg shadow-sm text-center">
                                 <i class="fas fa-rocket text-primary text-xl mb-2"></i>
                                 <p class="text-sm text-gray-600">HMCL</p>
                             </div>
-                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                            <div class="bg-white p-3 rounded-lg shadow-sm text-center">
                                 <i class="fas fa-fire text-primary text-xl mb-2"></i>
                                 <p class="text-sm text-gray-600">Forge</p>
                             </div>
-                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                            <div class="bg-white p-3 rounded-lg shadow-sm text-center">
                                 <i class="fas fa-plug text-primary text-xl mb-2"></i>
-                                <p class="text-sm text-gray-600">Fabric</p>
+                                <p class="text-sm font-medium text-primary">Fabric</p>
                             </div>
                         </div>
                     </div>
@@ -285,7 +352,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <div class="flex items-center space-x-2 mb-4">
-                        <i class="fas fa-flower-daffodil text-primary text-2xl"></i>
+                        <i class="fas fa-seedling text-primary text-2xl"></i>
                         <span class="text-xl font-bold">FlowerClient</span>
                     </div>
                     <p class="text-gray-400 max-w-xs">
@@ -293,8 +360,8 @@
                     </p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fab fa-discord text-2xl"></i>
+                    <a href="https://qm.qq.com/cgi-bin/qm/qr?k=YOUR_QQ_GROUP_KEY&jump_from=webapi" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fab fa-qq text-2xl"></i>
                     </a>
                     <a href="https://github.com/YOUR_USERNAME/FlowerClient" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
                         <i class="fab fa-github text-2xl"></i>
@@ -351,6 +418,38 @@
                 nav.classList.add('py-3');
                 nav.classList.remove('py-2', 'shadow');
             }
+        });
+
+        // 滚动显示动画
+        const fadeElements = document.querySelectorAll('.animate-fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单（如果打开）
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
