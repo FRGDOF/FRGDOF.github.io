@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerClient - 现代化Minecraft作弊客户端</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 图标库 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7C3AED', // 主色调：紫色（现代感）
+                        secondary: '#A855F7', // 辅助色
+                        dark: '#1E1B4B',      // 深色文本
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'], // 现代无衬线字体
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+            }
+            .btn-secondary {
+                @apply bg-white hover:bg-gray-100 text-primary font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg border border-primary/20;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 text-gray-800">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fas fa-flower-daffodil text-primary text-2xl"></i>
+                <span class="text-xl font-bold text-dark">FlowerClient</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-600 hover:text-primary transition-colors">功能</a>
+                <a href="#download" class="text-gray-600 hover:text-primary transition-colors">下载</a>
+                <a href="#about" class="text-gray-600 hover:text-primary transition-colors">关于</a>
+                <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-600 hover:text-primary transition-colors">
+                    <i class="fab fa-discord mr-1"></i>Discord
+                </a>
+            </div>
+            <button class="md:hidden text-gray-600" id="mobileMenuBtn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单（默认隐藏） -->
+        <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobileMenu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#features" class="text-gray-600 hover:text-primary py-2 transition-colors">功能</a>
+                <a href="#download" class="text-gray-600 hover:text-primary py-2 transition-colors">下载</a>
+                <a href="#about" class="text-gray-600 hover:text-primary py-2 transition-colors">关于</a>
+                <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-600 hover:text-primary py-2 transition-colors">
+                    <i class="fab fa-discord mr-1"></i>Discord
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-white to-purple-50">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-4 text-shadow">
+                    FlowerClient
+                </h1>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-8 max-w-lg">
+                    为Minecraft打造的 <span class="text-primary font-semibold">现代化</span> 作弊客户端，<br>强大、灵活且功能丰富，重新定义游戏体验。
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#download" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>立即下载
+                    </a>
+                    <a href="#features" class="btn-secondary">
+                        <i class="fas fa-list mr-2"></i>查看功能
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <!-- 抽象图形（代表客户端视觉） -->
+                <div class="w-64 h-64 bg-primary/10 rounded-xl flex items-center justify-center relative overflow-hidden">
+                    <i class="fas fa-gamepad text-6xl text-primary/30 absolute -top-4 -right-4"></i>
+                    <i class="fas fa-flower-daffodil text-5xl text-primary"></i>
+                    <div class="absolute -bottom-4 -left-4 bg-secondary/20 rounded-full w-32 h-32"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 功能区域 -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16 text-dark">强大的核心功能</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 功能卡片 1：透视功能 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-eye text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">透视功能</h3>
+                    <p class="text-gray-600">
+                        清晰查看墙壁后的实体、矿物与玩家，支持自定义透视范围与颜色，在生存与PVP中抢占先机。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 2：飞行模块 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-plane text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">飞行模块</h3>
+                    <p class="text-gray-600">
+                        自由控制飞行速度、高度与模式，支持平滑飞行与瞬间移动，轻松探索或跨越地形限制。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 3：自动挖矿 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-hammer text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">自动挖矿</h3>
+                    <p class="text-gray-600">
+                        智能识别并挖掘指定矿物，支持自定义挖掘范围与效率，解放双手，快速获取资源。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 4：自定义脚本 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">自定义脚本</h3>
+                    <p class="text-gray-600">
+                        支持JavaScript脚本扩展，可编写自定义功能与自动化流程，满足高级用户的个性化需求。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 5：反反作弊绕过 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">反反作弊绕过</h3>
+                    <p class="text-gray-600">
+                        内置多种反反作弊技术，有效绕过主流服务器的反作弊系统，降低封禁风险。
+                    </p>
+                </div>
+
+                <!-- 功能卡片 6：界面自定义 -->
+                <div class="bg-gray-50 rounded-xl p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">界面自定义</h3>
+                    <p class="text-gray-600">
+                        高度可定制的UI界面，支持主题切换、元素位置调整与透明度设置，打造专属视觉体验。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" class="py-16 bg-gradient-to-br from-purple-50 to-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4 text-dark">立即下载 FlowerClient</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                兼容Minecraft 1.8.x - 1.20.x 全版本，支持正版与第三方启动器，下载后按照说明快速安装。
+            </p>
+            <a href="https://github.com/YOUR_USERNAME/FlowerClient/releases" target="_blank" class="btn-primary text-lg">
+                <i class="fas fa-download mr-2"></i>下载最新版本 (v1.0.0)
+            </a>
+            <p class="text-gray-500 text-sm mt-4">
+                如遇下载/安装问题，可加入 <a href="https://discord.gg/YOUR_INVITE_LINK" class="text-primary hover:underline" target="_blank">Discord 社区</a> 获取帮助
+            </p>
+        </div>
+    </section>
+
+    <!-- 关于区域 -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl font-bold mb-6 text-dark">关于 FlowerClient</h2>
+                    <p class="text-gray-600 mb-4">
+                        FlowerClient 是一款为Minecraft玩家打造的现代化作弊客户端，致力于提供强大、稳定且易于使用的游戏增强功能。
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        开发团队持续维护与更新，确保兼容最新Minecraft版本，并不断迭代新功能、优化用户体验。
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-600">免费开源</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-600">无广告干扰</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-600">高频次更新</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-600">社区驱动开发</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-dark">版本兼容</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="w-20 text-gray-600">Minecraft 1.8.x</span>
+                                <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-20 text-gray-600">Minecraft 1.12.x</span>
+                                <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-20 text-gray-600">Minecraft 1.16.x</span>
+                                <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-20 text-gray-600">Minecraft 1.19.x</span>
+                                <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-20 text-gray-600">Minecraft 1.20.x</span>
+                                <i class="fas fa-check text-green-500 ml-2"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-8 mb-4 text-dark">支持启动器</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                                <i class="fas fa-cube text-primary text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">官方启动器</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                                <i class="fas fa-rocket text-primary text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">HMCL</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                                <i class="fas fa-fire text-primary text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">Forge</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                                <i class="fas fa-plug text-primary text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">Fabric</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-flower-daffodil text-primary text-2xl"></i>
+                        <span class="text-xl font-bold">FlowerClient</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">
+                        为Minecraft打造的现代化作弊客户端，重新定义你的游戏体验。
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/YOUR_USERNAME/FlowerClient" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fas fa-globe text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 FlowerClient 开发团队. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 回到顶部功能
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 导航栏滚动样式变化
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow');
+                nav.classList.remove('py-3');
+            } else {
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2', 'shadow');
+            }
+        });
+    </script>
+</body>
+</html>
